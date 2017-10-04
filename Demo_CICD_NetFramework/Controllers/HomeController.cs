@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ namespace Demo_CICD_NetFramework.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = ConfigurationManager.AppSettings["AppName"];
             return View();
         }
 
