@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "your_name": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "variables": {
+    "site_name": "[concat('democicd','-',parameters('your_name'))]",
+    "slot_name": "deploy",
+    "api_site_slot": "[concat(variables('site_name'),'/',variables('slot_name'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2016-09-01",
+      "name": "[variables('site_name')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[variables('site_name')]",
+        "workerSizeId": "0",
+        "reserved": false,
+        "numberOfWorkers": "1",
+        "hostingEnvironment": ""
+      },
+      "sku": {
+        "Tier": "Standard",
+        "Name": "S1"
+      }
+    },
+    {
+      "name": "[variables('site_name')]",
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "apiVersion": "2015-08-01",
+      "location": "[resourceGroup().location]",
+      "tags": {
+      },
+      "properties": {
+        "name": "[variables('site_name')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('site_name'))]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "name": "[variables('slot_name')]",
+          "type": "slots",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites/', variables('site_name'))]"
+          ]
+        }
+      ],
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', variables('site_name'))]"
+      ]
+    }
+  ]
+}

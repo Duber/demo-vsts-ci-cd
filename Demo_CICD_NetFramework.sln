@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_CICD_NetFramework", "Demo_CICD_NetFramework\Demo_CICD_NetFramework.csproj", "{0F45FB8B-A316-40F1-827D-43DBFBF05757}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Demo_CICD_NetFramework.ARM", "Demo_CICD_NetFramework.ARM\Demo_CICD_NetFramework.ARM.deployproj", "{F246DDDF-9020-4F6B-9DD5-84A5A0131CEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0F45FB8B-A316-40F1-827D-43DBFBF05757}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F45FB8B-A316-40F1-827D-43DBFBF05757}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F45FB8B-A316-40F1-827D-43DBFBF05757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F246DDDF-9020-4F6B-9DD5-84A5A0131CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F246DDDF-9020-4F6B-9DD5-84A5A0131CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F246DDDF-9020-4F6B-9DD5-84A5A0131CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F246DDDF-9020-4F6B-9DD5-84A5A0131CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
