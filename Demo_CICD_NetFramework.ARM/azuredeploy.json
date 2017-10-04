@@ -19,11 +19,7 @@
       "type": "Microsoft.Web/serverfarms",
       "location": "[resourceGroup().location]",
       "properties": {
-        "name": "[variables('site_name')]",
-        "workerSizeId": "0",
-        "reserved": false,
-        "numberOfWorkers": "1",
-        "hostingEnvironment": ""
+        "name": "[variables('site_name')]"
       },
       "sku": {
         "Tier": "Standard",
@@ -50,7 +46,8 @@
           "location": "[resourceGroup().location]",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites/', variables('site_name'))]"
-          ]
+          ],
+          "Properties":  {} 
         }
       ],
       "dependsOn": [
