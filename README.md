@@ -1,4 +1,4 @@
-# demo-vsts-ci-cd
+# Workshop: Continuous Integration and Deployment with Visual Studio Team Services
 
 This project is part of my workshop about setting up a Continuous Integration & Deployment pipeline using Visual Studio Team Services.
 
