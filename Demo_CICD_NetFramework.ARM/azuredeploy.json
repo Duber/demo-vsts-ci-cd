@@ -115,6 +115,19 @@
             "endIpAddress": "0.0.0.0",
             "startIpAddress": "0.0.0.0"
           }
+        },
+        {
+          "name": "AllowAllIps",
+          "type": "firewallrules",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers/', variables('sql_server_name'))]"
+          ],
+          "location": "[resourceGroup().location]",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "255.255.255.255"
+          }
         }
       ],
       "dependsOn": []
