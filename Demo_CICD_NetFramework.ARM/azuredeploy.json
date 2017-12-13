@@ -5,12 +5,32 @@
     "your_name": {
       "minLength": 1,
       "type": "string"
-    }
+    },
+    "dbadminlogin": {
+      "defaultValue": "dbadmin",
+      "minLength": 1,
+      "type": "string"
+    },
+    "dbadminpass": {
+      "defaultValue": "dbadminpass",
+      "minLength": 1,
+      "type": "securestring"
+    },
+    "db_size": {
+      "defaultValue": "Basic",
+      "type": "string"
+    },
+    "db_max_bytes": {
+      "defaultValue": "2147483648",
+      "type": "string"
+    } 
   },
   "variables": {
     "site_name": "[concat('democicd','-',parameters('your_name'))]",
     "slot_name": "deploy",
-    "api_site_slot": "[concat(variables('site_name'),'/',variables('slot_name'))]"
+    "api_site_slot": "[concat(variables('site_name'),'/',variables('slot_name'))]",
+    "sql_server_name": "[concat('democicd',parameters('your_name'),'dbserver')]",
+    "db_name": "[concat('democicd',parameters('your_name'),'db')]"
   },
   "resources": [
     {
@@ -47,12 +67,57 @@
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites/', variables('site_name'))]"
           ],
-          "Properties":  {} 
+          "Properties": {}
         }
       ],
       "dependsOn": [
         "[concat('Microsoft.Web/serverfarms/', variables('site_name'))]"
       ]
+    },
+    {
+      "name": "[variables('sql_server_name')]",
+      "type": "Microsoft.Sql/servers",
+      "kind": "v12.0",
+      "apiVersion": "2014-04-01-preview",
+      "location": "West Europe",
+      "properties": {
+        "administratorLogin": "[parameters('dbadminlogin')]",
+        "administratorLoginPassword": "[parameters('dbadminpass')]",
+        "version": "12.0"
+      },
+      "resources": [
+        {
+          "name": "[variables('db_name')]",
+          "type": "databases",
+          "kind": "v12.0,user",
+          "apiVersion": "2014-04-01-preview",
+          "location": "West Europe",
+          "properties": {
+            "edition": "[parameters('db_size')]",
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": "[parameters('db_max_bytes')]",
+            "defaultSecondaryLocation": "[resourceGroup().location]",
+            "requestedServiceObjectiveName": "[parameters('db_size')]"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('sql_server_name'))]"
+          ]
+        },
+        {
+          "name": "AllowAllWindowsAzureIps",
+          "type": "firewallrules",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers/', variables('sql_server_name'))]"
+          ],
+          "location": "[resourceGroup().location]",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "0.0.0.0"
+          }
+        }
+      ],
+      "dependsOn": []
     }
   ]
 }
