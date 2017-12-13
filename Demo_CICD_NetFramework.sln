@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_CICD_NetFramework", "Demo_CICD_NetFramework\Demo_CICD_NetFramework.csproj", "{0F45FB8B-A316-40F1-827D-43DBFBF05757}"
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Demo_CICD_NetFramework.ARM", "Demo_CICD_NetFramework.ARM\Demo_CICD_NetFramework.ARM.deployproj", "{F246DDDF-9020-4F6B-9DD5-84A5A0131CEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbScripts", "DbScripts", "{11971587-E78C-46AB-B7C9-F303A1310C15}"
+	ProjectSection(SolutionItems) = preProject
+		DbScripts\20171213-create-users-table.sql = DbScripts\20171213-create-users-table.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
